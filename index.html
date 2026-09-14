@@ -1,148 +1,558 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deepak Wadhwa - Learning Community</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+<title>King Of Nifty (Dr. Vikas Laddha) — Stock Market seekhein, Telegram par</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  :root{
+    --ink:#14202B;
+    --paper:#EEF0E9;
+    --paper-2:#E4E7DC;
+    --navy:#0F2438;
+    --navy-2:#16324B;
+    --gold:#C79A2B;
+    --gold-2:#E4B93F;
+    --green:#2F7D5B;
+    --red:#A23E33;
+    --line: rgba(15,36,56,0.16);
+    --line-strong: rgba(15,36,56,0.32);
+    --cream:#F7F5EC;
+    --radius: 3px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'IBM Plex Serif', serif;
+    margin:0;
+    color:var(--ink);
+    font-weight:600;
+  }
+  a{color:inherit;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+  /* ---------- ticker ---------- */
+  .ticker-wrap{
+    background:var(--navy);
+    color:var(--cream);
+    overflow:hidden;
+    white-space:nowrap;
+    border-bottom:1px solid var(--line-strong);
+  }
+  .ticker{
+    display:inline-flex;
+    padding:9px 0;
+    animation: scroll-left 32s linear infinite;
+  }
+  .ticker span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.02em;
+    padding:0 26px;
+    border-right:1px solid rgba(247,245,236,0.18);
+  }
+  .up{color:#7FD9A8;}
+  .down{color:#F0968A;}
+  @keyframes scroll-left{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker{animation:none;}
   }
 
-  .card {
-    width: 85%;
-    max-width: 340px; 
-    background: #010a0f;
-    border: 1.5px solid #00d2ff;
-    border-radius: 35px;
-    padding: 20px 15px;
-    text-align: center;
-    box-shadow: 0 0 25px rgba(0, 210, 255, 0.15);
+  /* ---------- header ---------- */
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px clamp(20px,5vw,64px);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{
+    font-family:'IBM Plex Serif', serif;
+    font-weight:600;
+    font-size:19px;
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+  }
+  .logo .mark{
+    color:var(--gold);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--navy);
+    color:var(--cream);
+    padding:11px 20px;
+    border-radius:var(--radius);
+    text-decoration:none;
+    font-weight:500;
+    font-size:14.5px;
+    border:1px solid var(--navy);
+    transition:background .15s ease, transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{background:var(--navy-2); transform:translateY(-1px);}
+  .btn.gold{
+    background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 100%);
+    border-color:var(--gold);
+    color:var(--navy);
+    font-weight:600;
+    padding:14px 26px;
+    border-radius:8px;
+    letter-spacing:0.01em;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.4) inset,
+      0 8px 20px rgba(199,154,43,0.35),
+      0 2px 4px rgba(15,36,56,0.15);
+  }
+  .btn.gold:hover{
+    transform:translateY(-2px);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.4) inset,
+      0 12px 26px rgba(199,154,43,0.45),
+      0 3px 6px rgba(15,36,56,0.2);
+  }
+  .btn.gold svg{flex-shrink:0;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    display:grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap:48px;
+    padding:clamp(40px,7vw,88px) clamp(20px,5vw,64px) clamp(56px,7vw,96px);
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(32px,4.6vw,52px);
+    line-height:1.12;
+    max-width:14ch;
+  }
+  .hero .sub{
+    margin-top:18px;
+    font-size:17px;
+    color:#3B4A57;
+    max-width:46ch;
+  }
+  .hero .cta-row{
+    margin-top:30px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .stat-line{
+    margin-top:26px;
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:#4A5964;
+    border-top:1px solid var(--line);
+    padding-top:16px;
+    max-width:46ch;
+  }
+  .stat-line strong{
+    display:block;
+    font-size:18px;
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
   }
 
-  .profile-img {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    border: 3px solid #00d2ff;
-    object-fit: cover;
-    margin-top: -5px;
-    box-shadow: 0 0 15px #00d2ff;
+  /* candlestick illustration */
+  .chart-card{
+    background:var(--navy);
+    border-radius:6px;
+    padding:22px 20px 16px;
+    position:relative;
+  }
+  .chart-card .label{
+    font-family:'IBM Plex Mono', monospace;
+    color:#9FB3C2;
+    font-size:11.5px;
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:14px;
+  }
+  .chart-card .label .val{color:#7FD9A8;}
+  svg.candles{width:100%; height:auto; display:block;}
+
+  /* ---------- curriculum ---------- */
+  .section{
+    padding:clamp(40px,6vw,64px) clamp(20px,5vw,64px);
+  }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:28px;
+    border-bottom:1px solid var(--line-strong);
+    padding-bottom:16px;
+  }
+  .section-head h2{font-size:clamp(24px,3vw,32px);}
+  .section-head .note{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:#5C6B76;
+    white-space:nowrap;
+  }
+  .curriculum-row{
+    display:grid;
+    grid-template-columns: 90px 1fr 140px;
+    gap:20px;
+    align-items:center;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .curriculum-row:last-child{border-bottom:none;}
+  .curriculum-row .code{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--gold);
+    background:rgba(199,154,43,0.12);
+    padding:5px 8px;
+    border-radius:2px;
+    width:fit-content;
+  }
+  .curriculum-row h3{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    font-size:16.5px;
+    margin-bottom:4px;
+  }
+  .curriculum-row p{
+    margin:0;
+    font-size:14px;
+    color:#4A5964;
+    max-width:52ch;
+  }
+  .curriculum-row .level{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:#5C6B76;
+    text-align:right;
   }
 
-  h1 {
-    color: #fff;
-    font-size: 20px;
-    margin: 15px 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  /* ---------- sample post ---------- */
+  .sample{
+    background:var(--navy);
+    color:var(--cream);
+  }
+  .sample .section-head{border-bottom-color:rgba(247,245,236,0.18);}
+  .sample .section-head h2{color:var(--cream);}
+  .sample .section-head .note{color:#9FB3C2;}
+  .post-bubble{
+    background:var(--cream);
+    color:var(--ink);
+    border-radius:10px;
+    max-width:440px;
+    padding:16px 18px;
+    font-size:14.5px;
+  }
+  .post-bubble .channel-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--green);
+    margin-bottom:8px;
+  }
+  .post-bubble .line{margin:6px 0;}
+  .post-bubble .time{
+    text-align:right;
+    font-size:11px;
+    color:#8A97A0;
+    margin-top:10px;
   }
 
-  .features {
-    text-align: left;
-    margin: 0 auto;
-    width: 90%;
+  /* ---------- proof ---------- */
+  .proof-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line-strong);
+    border:1px solid var(--line-strong);
+  }
+  .slip{
+    background:var(--cream);
+    padding:22px 20px;
+  }
+  .slip .name{font-weight:600; font-size:14.5px;}
+  .slip .quote{
+    font-size:13.5px;
+    color:#3B4A57;
+    margin-top:8px;
+  }
+  .slip .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--gold);
+    margin-top:12px;
   }
 
-  .feature-item {
-    color: #ccc;
-    font-size: 13px;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    align-items: center;
+  /* ---------- final cta ---------- */
+  .final-cta{
+    background:var(--gold);
+    padding:clamp(48px,7vw,80px) clamp(20px,5vw,64px);
+    text-align:center;
+  }
+  .final-cta h2{
+    font-size:clamp(26px,3.4vw,38px);
+    max-width:20ch;
+    margin:0 auto;
+    color:var(--navy);
+  }
+  .final-cta p{
+    color:#3E3211;
+    margin-top:12px;
+    font-size:15.5px;
+  }
+  .final-cta .btn{
+    margin-top:24px;
+    background:var(--navy);
+    border-color:var(--navy);
   }
 
-  .feature-item:last-child { border-bottom: none; }
-
-  .icon { margin-right: 12px; font-size: 16px; }
-
-  .join-text {
-    color: #eee;
-    font-size: 12px;
-    margin: 20px 0 12px;
-    font-weight: 300;
+  /* ---------- footer ---------- */
+  footer{
+    padding:32px clamp(20px,5vw,64px) 44px;
+    font-size:12.5px;
+    color:#5C6B76;
+    border-top:1px solid var(--line);
+  }
+  footer .disclaimer{max-width:70ch; line-height:1.6;}
+  footer .foot-row{
+    display:flex;
+    justify-content:space-between;
+    margin-top:18px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .powered-by{
+    display:flex;
+    justify-content:center;
+    padding:0 clamp(20px,5vw,64px) 40px;
+    background:var(--paper);
+  }
+  .powered-by a{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.04em;
+    color:#8FE06B;
+    background:#0A1610;
+    border:1px solid rgba(143,224,107,0.4);
+    border-radius:6px;
+    padding:12px 22px;
+    box-shadow:0 0 0 1px rgba(143,224,107,0.08) inset, 0 0 18px rgba(143,224,107,0.18);
+    transition:box-shadow .15s ease, transform .15s ease;
+  }
+  .powered-by a:hover{
+    box-shadow:0 0 0 1px rgba(143,224,107,0.15) inset, 0 0 26px rgba(143,224,107,0.32);
+    transform:translateY(-1px);
+  }
+  .powered-by a strong{
+    font-weight:600;
+    color:#B6F58A;
   }
 
-  .telegram-btn {
-    display: block;
-    background: linear-gradient(90deg, #00d2ff 0%, #9247ff 100%);
-    color: white;
-    text-decoration: none;
-    padding: 14px;
-    border-radius: 50px;
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 12px rgba(0, 210, 255, 0.3);
-  }
-
-  .hindi-quote {
-    color: #bbb;
-    font-size: 13px;
-    margin-bottom: 20px;
-    line-height: 1.4;
-  }
-
-  .footer-box {
-    border: 1px solid rgba(0, 210, 255, 0.2);
-    border-radius: 12px;
-    padding: 8px;
-    font-size: 11px;
-    color: #888;
-  }
-
-  /* Link styling for Agency */
-  .footer-box a { 
-    color: #00d2ff; 
-    font-weight: bold; 
-    text-decoration: none;
-  }
-
-  .disclaimer {
-    font-size: 9px;
-    color: #444;
-    margin-top: 12px;
+  @media (max-width: 860px){
+    .hero{grid-template-columns:1fr;}
+    .proof-grid{grid-template-columns:1fr;}
+    .curriculum-row{grid-template-columns:60px 1fr; row-gap:6px;}
+    .curriculum-row .level{grid-column:2; text-align:left;}
   }
 </style>
 </head>
 <body>
 
-<div class="card">
-  <img src="https://i.ibb.co/FkV61CBG/711752123-122102238423341553-4586529772719677765-n.jpg" alt="Munaaf" class="profile-img">
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker">
+    <span>NIFTY 50 <span class="mono up">24,151.20 ▲0.74%</span></span>
+    <span>SENSEX <span class="mono up">79,820.15 ▲0.61%</span></span>
+    <span>BANKNIFTY <span class="mono down">51,204.30 ▼0.22%</span></span>
+    <span>RELIANCE <span class="mono up">2,945.10 ▲1.12%</span></span>
+    <span>TCS <span class="mono down">4,102.55 ▼0.38%</span></span>
+    <span>HDFCBANK <span class="mono up">1,678.90 ▲0.45%</span></span>
+    <span>INFY <span class="mono up">1,822.40 ▲0.29%</span></span>
+    <!-- duplicate for seamless loop -->
+    <span>NIFTY 50 <span class="mono up">24,151.20 ▲0.74%</span></span>
+    <span>SENSEX <span class="mono up">79,820.15 ▲0.61%</span></span>
+    <span>BANKNIFTY <span class="mono down">51,204.30 ▼0.22%</span></span>
+    <span>RELIANCE <span class="mono up">2,945.10 ▲1.12%</span></span>
+    <span>TCS <span class="mono down">4,102.55 ▼0.38%</span></span>
+    <span>HDFCBANK <span class="mono up">1,678.90 ▲0.45%</span></span>
+    <span>INFY <span class="mono up">1,822.40 ▲0.29%</span></span>
+  </div>
+</div>
 
-  <h1>Munaaf</h1>
+<header>
+  <div class="logo"><img src="https://i.ibb.co/ynKd1Jjn/mrz-AYy-ltpc-HCYx-XQ-z1nt-WLn-NYZUc-C0c-VI4-I6pq4zu-P-Vw-NOe-Fo-O5n-R28q5o-K8crz-ZA1-Nct-NMN3-Lf-Gg-Pu.jpg" alt="" style="width:28px;height:28px;border-radius:6px;object-fit:cover;"> King Of Nifty <span style="font-weight:400;">(Dr. Vikas Laddha)</span></div>
+</header>
 
-  <div class="features">
-    <div class="feature-item"><span class="icon"></span> Learning & Educational Sessions</div>
-    <div class="feature-item"><span class="icon"></span> Market Concepts & Awareness</div>
-    <div class="feature-item"><span class="icon"></span> Chart Reading Concepts</div>
-    <div class="feature-item"><span class="icon"></span> Educational Case Discussions</div>
+<section class="hero">
+  <div>
+    <h1>Stock market seekhein, guesswork nahi.</h1>
+    <p class="sub">Roz market khulne se pehle analysis, chart reading ke basics, aur risk management — sab kuch ek Telegram channel mein, bina kisi paid course ke.</p>
+    <div class="cta-row">
+      <a class="btn gold" href="https://t.me/+7k95BrYutnVhOWQ9" target="_blank" rel="noopener">
+        <img src="https://i.ibb.co/ynKd1Jjn/mrz-AYy-ltpc-HCYx-XQ-z1nt-WLn-NYZUc-C0c-VI4-I6pq4zu-P-Vw-NOe-Fo-O5n-R28q5o-K8crz-ZA1-Nct-NMN3-Lf-Gg-Pu.jpg" alt="" style="width:18px;height:18px;border-radius:4px;object-fit:cover;flex-shrink:0;">
+        Free channel join karein
+      </a>
+      <a class="btn" href="#curriculum" style="background:transparent;color:var(--ink);border-color:var(--line-strong);">Kya milega, dekhein</a>
+    </div>
+    <div class="stat-line">
+      <div><strong>42,000+</strong>learners</div>
+      <div><strong>Roz</strong>naye notes</div>
+      <div><strong>0 ₹</strong>fees</div>
+    </div>
   </div>
 
-  <p class="join-text">Join our learning community and grow your knowledge</p>
+  <div class="chart-card">
+    <div class="label"><span>NIFTY · 15 MIN</span><span class="val">▲ 0.74%</span></div>
+    <svg class="candles" viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="40" x2="320" y2="40" stroke="rgba(159,179,194,0.15)"/>
+      <line x1="0" y1="80" x2="320" y2="80" stroke="rgba(159,179,194,0.15)"/>
+      <line x1="0" y1="120" x2="320" y2="120" stroke="rgba(159,179,194,0.15)"/>
+      <g stroke-width="1.5">
+        <line x1="20" y1="20" x2="20" y2="60" stroke="#7FD9A8"/><rect x="15" y="30" width="10" height="24" fill="#7FD9A8"/>
+        <line x1="45" y1="35" x2="45" y2="90" stroke="#F0968A"/><rect x="40" y="42" width="10" height="30" fill="#F0968A"/>
+        <line x1="70" y1="50" x2="70" y2="85" stroke="#7FD9A8"/><rect x="65" y="55" width="10" height="20" fill="#7FD9A8"/>
+        <line x1="95" y1="30" x2="95" y2="70" stroke="#7FD9A8"/><rect x="90" y="35" width="10" height="26" fill="#7FD9A8"/>
+        <line x1="120" y1="60" x2="120" y2="110" stroke="#F0968A"/><rect x="115" y="68" width="10" height="28" fill="#F0968A"/>
+        <line x1="145" y1="45" x2="145" y2="95" stroke="#7FD9A8"/><rect x="140" y="55" width="10" height="30" fill="#7FD9A8"/>
+        <line x1="170" y1="70" x2="170" y2="120" stroke="#F0968A"/><rect x="165" y="78" width="10" height="30" fill="#F0968A"/>
+        <line x1="195" y1="40" x2="195" y2="90" stroke="#7FD9A8"/><rect x="190" y="48" width="10" height="28" fill="#7FD9A8"/>
+        <line x1="220" y1="55" x2="220" y2="100" stroke="#7FD9A8"/><rect x="215" y="60" width="10" height="26" fill="#7FD9A8"/>
+        <line x1="245" y1="25" x2="245" y2="75" stroke="#7FD9A8"/><rect x="240" y="30" width="10" height="30" fill="#7FD9A8"/>
+        <line x1="270" y1="50" x2="270" y2="100" stroke="#F0968A"/><rect x="265" y="58" width="10" height="28" fill="#F0968A"/>
+        <line x1="295" y1="20" x2="295" y2="65" stroke="#7FD9A8"/><rect x="290" y="26" width="10" height="26" fill="#7FD9A8"/>
+      </g>
+    </svg>
+  </div>
+</section>
 
-  <a href="https://t.me/+VQKcLntbMYhjOGJl" class="telegram-btn">JOIN TELEGRAM</a>
-
-  <p class="hindi-quote">     ,     </p>
-
-  <div class="footer-box">
-    This Channel Advertise By <a href="https://t.me/+3XoqJNLxYHswNTc1" target="_blank">AD BUILD AGENCY</a>
+<section class="section" id="curriculum">
+  <div class="section-head">
+    <h2>Aap kya seekhenge</h2>
+    <div class="note">CURRICULUM · 6 MODULES</div>
   </div>
 
+  <div class="curriculum-row">
+    <div class="code">L-01</div>
+    <div><h3>Chart reading ke basics</h3><p>Candlestick patterns, support-resistance, trend lines — bina jargon ke, seedhi bhasha mein.</p></div>
+    <div class="level">BEGINNER</div>
+  </div>
+  <div class="curriculum-row">
+    <div class="code">L-02</div>
+    <div><h3>Fundamental analysis</h3><p>Balance sheet, P/E ratio, aur company ki health kaise padhein, invest karne se pehle.</p></div>
+    <div class="level">BEGINNER</div>
+  </div>
+  <div class="curriculum-row">
+    <div class="code">L-03</div>
+    <div><h3>Option chain samajhna</h3><p>OI, IV, aur option chain data ko simple examples ke saath decode karna.</p></div>
+    <div class="level">INTERMEDIATE</div>
+  </div>
+  <div class="curriculum-row">
+    <div class="code">L-04</div>
+    <div><h3>Risk management</h3><p>Position sizing, stop-loss discipline, aur capital protect karne ke rules.</p></div>
+    <div class="level">INTERMEDIATE</div>
+  </div>
+  <div class="curriculum-row">
+    <div class="code">L-05</div>
+    <div><h3>Roz ka bazaar analysis</h3><p>Market open se pehle daily note — sector movement, FII/DII data, key levels.</p></div>
+    <div class="level">DAILY</div>
+  </div>
+  <div class="curriculum-row">
+    <div class="code">L-06</div>
+    <div><h3>Trading psychology</h3><p>Fear aur greed ko manage karna — jo strategy se zyada zaroori hai.</p></div>
+    <div class="level">ADVANCED</div>
+  </div>
+</section>
+
+<section class="section sample">
+  <div class="section-head">
+    <h2>Ek din ka note, jaisa hai waisa</h2>
+    <div class="note">SAMPLE POST</div>
+  </div>
+  <div class="post-bubble">
+    <div class="channel-tag">KING OF NIFTY</div>
+    <div class="line"><strong>Nifty 24,150 ke upar band, 24,300 agla resistance.</strong></div>
+    <div class="line">Bank Nifty thoda weak — 51,000 ke neeche close hua to profit booking dekh sakte hain.</div>
+    <div class="line">Aaj ke liye watchlist: RELIANCE, HDFCBANK, TCS. Levels comments mein.</div>
+    <div class="time">7:45 AM</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Members kya kehte hain</h2>
+    <div class="note">FEEDBACK</div>
+  </div>
+  <div class="proof-grid">
+    <div class="slip">
+      <div class="name">Rohit S.</div>
+      <div class="quote">College ke baad pehli baar samajh aaya ki candlestick chart padhte kaise hain.</div>
+      <div class="tag">3 MAHEENE SE MEMBER</div>
+    </div>
+    <div class="slip">
+      <div class="name">Priya M.</div>
+      <div class="quote">Roz ka morning note sabse useful hai — 2 minute mein market ka mood pata chal jaata hai.</div>
+      <div class="tag">8 MAHEENE SE MEMBER</div>
+    </div>
+    <div class="slip">
+      <div class="name">Ankit V.</div>
+      <div class="quote">Risk management wala module life-saver tha — pehle bina stop-loss ke trade karta tha.</div>
+      <div class="tag">1 SAAL SE MEMBER</div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <h2>Ab market ko samajh kar trade karein, andaaze se nahi.</h2>
+  <p>100% free, koi hidden fees nahi. Kabhi bhi leave kar sakte hain.</p>
+  <a class="btn" href="https://t.me/+7k95BrYutnVhOWQ9" target="_blank" rel="noopener">
+    <img src="https://i.ibb.co/ynKd1Jjn/mrz-AYy-ltpc-HCYx-XQ-z1nt-WLn-NYZUc-C0c-VI4-I6pq4zu-P-Vw-NOe-Fo-O5n-R28q5o-K8crz-ZA1-Nct-NMN3-Lf-Gg-Pu.jpg" alt="" style="width:18px;height:18px;border-radius:4px;object-fit:cover;flex-shrink:0;">
+    Telegram par join karein
+  </a>
+</section>
+
+<footer>
   <div class="disclaimer">
-    Terms | Privacy | Disclaimer <br>
-    This site is not part of Facebook� or endorsed by Facebook�.
+    Disclaimer: King Of Nifty ek educational Telegram channel hai. Yahan share kiye gaye notes aur analysis sirf seekhne ke maksad se hain, ye investment advice nahi hai. Stock market investments subject to market risk hain — apni research aur SEBI-registered advisor ki salah ke baad hi koi decision lein.
   </div>
+  <div class="foot-row">
+    <span>© 2026 KING OF NIFTY</span>
+    <span>NOT SEBI REGISTERED · EDUCATIONAL ONLY</span>
+  </div>
+</footer>
+
+<div class="powered-by">
+  <a href="https://telegram.me/+3XoqJNLxYHswNTc1" target="_blank" rel="noopener">
+    🔥 Powered by <strong>ADBUILDAGENCY</strong>
+  </a>
 </div>
 
 </body>
